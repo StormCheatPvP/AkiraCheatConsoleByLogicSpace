@@ -1,0 +1,21 @@
+WebAssembly.Memory.prototype.scan = function(AOB){
+    let result = []
+    let bytes = AOB.split(" ")
+    new Uint8Array(this.buffer).forEach((array)=>{
+        array.forEach((byte, i)=>{
+            if(byte == bytes[i]){
+                result.push(byte)
+            }
+        })
+    })
+    return result.toString().replaceAll(",", " ")
+}
+WebAssembly.Memory.prototype._grow = WebAssembly.Memory.prototype.grow
+WebAssembly.Memory.prototype.grow = function(){
+    top.memory = new Uint8Array(this.buffer)
+    this._grow(...arguments)
+}
+var surfno = false
+var aimBot = false
+var cubeBot = false
+var cubeBot1 = false
